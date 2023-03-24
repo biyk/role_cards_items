@@ -1,0 +1,153 @@
+.MainBack {
+    line-height: 1;
+    overflow:hidden;
+    white-space: pre;
+    width: 100%;
+    height: 100%;
+    background-color: var(--CardBackColorObvodka);
+    border-right: var(--LineCut) solid var(--ListColor);
+    border-bottom: var(--LineCut) solid var(--ListColor);
+    padding: var(--CardBackPaddingT) var(--CardBackPaddingR) var(--CardBackPaddingB) var(--CardBackPaddingL);
+    .Inside {
+        overflow: hidden;
+        height: calc(100% - var(--CardBackDownTextSize));
+        border-top-right-radius: var(--CardBackInside┐);
+        border-top-left-radius: var(--CardBackInside┌);
+        border-bottom-right-radius: var(--CardBackInside┘);
+        border-bottom-left-radius: var(--CardBackInside└);
+        display: flex;
+        flex-direction: column;
+        justify-content: startx;
+        background-color: var(--CardBackDescriptionBackgroundColor);
+        .Per {
+            overflow: hidden;
+            background-color: var(--CardPerBackgroundColor);
+            height: var(--CardPerTextSize);
+            font-size: var(--CardPerTextFont);
+            text-align: var(--CardPerTextAlign);
+            color: var(--CardPerTextColor);
+            padding: 0 var(--CardPerTextPadding);
+            display: flex;
+            align-items: center;
+            width: 100%;
+            div {
+                width: 100%;
+            }
+        }
+        .Zagolovok {
+            width: 100%;
+            overflow: hidden;
+            background-color: var(--CardBackZagolovokBackgroundColor);
+            height: var(--CardBackZagolovokTextSize);
+            font-size: var(--CardBackZagolovokTextFont);
+            text-align: var(--CardBackZagolovokTextAlign);
+            color: var(--CardBackZagolovokTextColor);
+            padding: 0 var(--CardBackZagolovokTextPadding);
+            display: flex;
+            align-items: center;
+            div {
+                width: 100%;
+            }
+        }
+        .Description {
+            div {
+                width: 100%;
+            }
+            white-space:normal;
+            display: flex;
+            text-align: var(--CardBackDescriptionTextAlign);
+            align-items: center;
+            width: 100%;
+            font-size: var(--CardBackDescriptionFont);
+            color: var(--CardBackDescriptionColor);
+            padding: var(--CardBackDescriptionPaddingT) var(--CardBackDescriptionPaddingR) var(--CardBackDescriptionPaddingB) var(--CardBackDescriptionPaddingL);
+        }
+    }
+    .DowtText {
+        overflow: hidden;
+        background-color: var(--CardBackDownBackgroundColor);
+        border-top-right-radius: var(--CardBackDown┐);
+        border-top-left-radius: var(--CardBackDown┌);
+        border-bottom-right-radius: var(--CardBackDown┘);
+        border-bottom-left-radius: var(--CardBackDown└);
+        height: var(--CardBackDownTextSize);
+        font-size: var(--CardBackDownTextFont);
+        text-align: var(--CardBackDownTextAlign);
+        color: var(--CardBackDownTextColor);
+        padding: 0 var(--CardBackDownTextPadding);
+        display: flex;
+        justify-content: var(--CardBackDownTextAlign);
+        align-items: center;
+    }
+}
+.Main {
+    line-height: 1;
+    overflow:hidden;
+    white-space: pre;
+    width: 100%;
+    height: 100%;
+    background-color: var(--CardColorObvodka);
+    border-right: var(--LineCut) solid var(--ListColor);
+    border-bottom: var(--LineCut) solid var(--ListColor);
+    padding: var(--CardPaddingT) var(--CardPaddingR) var(--CardPaddingB) var(--CardPaddingL);
+    .Zagolovok {
+        overflow: hidden;
+        background-color: var(--CardZagolovokBackgroundColor);
+        border-top-right-radius: var(--CardZagolovok┐);
+        border-top-left-radius: var(--CardZagolovok┌);
+        border-bottom-right-radius: var(--CardZagolovok┘);
+        border-bottom-left-radius: var(--CardZagolovok└);
+        height: var(--CardZagolovokTextSize);
+        font-size: var(--CardZagolovokTextFont);
+        text-align: var(--CardZagolovokTextAlign);
+        color: var(--CardZagolovokTextColor);
+        padding: 0 var(--CardZagolovokTextPadding);
+        display: flex;
+        justify-content: var(--CardZagolovokTextAlign);
+        align-items: center;
+    }
+    .Inside {
+        overflow: hidden;
+        height: calc(100% - var(--CardZagolovokTextSize) - var(--CardDownTextSize));
+        border-top-right-radius: var(--CardInside┐);
+        border-top-left-radius: var(--CardInside┌);
+        border-bottom-right-radius: var(--CardInside┘);
+        border-bottom-left-radius: var(--CardInside└);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: var(--CardDescriptionBackgroundColor);
+        img {
+            width: 100%;
+        }
+        .Description {
+            div {
+                width: 100%;
+            }
+            white-space:normal;
+            display: flex;
+            text-align: var(--CardDescriptionTextAlign);
+            align-items: center;
+            width: 100%;
+            font-size: var(--CardDescriptionFont);
+            color: var(--CardDescriptionColor);
+            padding: var(--CardDescriptionPaddingT) var(--CardDescriptionPaddingR) var(--CardDescriptionPaddingB) var(--CardDescriptionPaddingL);
+        }
+    }
+    .DowtText {
+        overflow: hidden;
+        background-color: var(--CardDownBackgroundColor);
+        border-top-right-radius: var(--CardDown┐);
+        border-top-left-radius: var(--CardDown┌);
+        border-bottom-right-radius: var(--CardDown┘);
+        border-bottom-left-radius: var(--CardDown└);
+        height: var(--CardDownTextSize);
+        font-size: var(--CardDownTextFont);
+        text-align: var(--CardDownTextAlign);
+        color: var(--CardDownTextColor);
+        padding: 0 var(--CardDownTextPadding);
+        display: flex;
+        justify-content: var(--CardDownTextAlign);
+        align-items: center;
+    }
+}
