@@ -255,15 +255,14 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
     const [showRedactor, setShowRedactor] = useState(true);
     const [pyt, setPyt] = useState<File[]|undefined[]>([]);
     const [pytSvitok, setPytSvitok] = useState<File[]|undefined[]>([]);
-    const [pytRamka, setPytRamka] = useState<File[]|undefined[]>([]);
     const [openThisBaseCase, setOpenThisBaseCase] = useState([false, false, false, false, false, false, false, false]);
     const [targetOption, setTargetOptions] = useState([false, false, false, false, false, false, false, false, false, false, false]);
     const [colors, setColors] = useState(["#ffffff","#9C0000","#9C0000","#ffffff","#fff2d6","#000000","#9C0000","#FFFFFF","#BE431E","#AF5E5E","#FFFFFF","#BE431E","#AF5E5E","#FFFFFF","#BE431E","#AF5E5E","#FFFFFF","#BE431E","#AF5E5E","#FFFFFF","#9C0000","#fff2d6","#000000","#9C0000","#FFFFFF","#fff2d6","#000000","#9C0000","#FFFFFF"]);
     const colorsNames = ["--ListColor","--CardColorObvodka","--CardZagolovokBackgroundColor","--CardZagolovokTextColor","--CardDescriptionBackgroundColor","--CardDescriptionColor","--CardDownBackgroundColor","--CardDownTextColor","--Krug1BorderColor","--Krug1BackgroundColor","--Krug1TextColor","--Krug2BorderColor","--Krug2BackgroundColor","--Krug2TextColor","--Krug3BorderColor","--Krug3BackgroundColor","--Krug3TextColor","--Krug4BorderColor","--Krug4BackgroundColor","--Krug4TextColor","--CardBackColorObvodka","--CardBackZagolovokBackgroundColor","--CardBackZagolovokTextColor","--CardPerBackgroundColor","--CardPerTextColor","--CardBackDescriptionBackgroundColor","--CardBackDescriptionColor","--CardBackDownBackgroundColor","--CardBackDownTextColor"];
     const [sizePole, setSizesPole] = useState([18,15,40,40,2,40,40,2,40,40,2,40,40,2,18,15,15,297,210,30,30,130,30,30,130,130,130]);
     const sizePoleNames = ["--CardZagolovokTextSize","--CardDownTextSize","--Krug1W","--Krug1H","--Krug1Bordersize","--Krug2W","--Krug2H","--Krug2Bordersize","--Krug3W","--Krug3H","--Krug3Bordersize","--Krug4W","--Krug4H","--Krug4Bordersize","--CardBackZagolovokTextSize","--CardPerTextSize","--CardBackDownTextSize","--ListH","--ListW","--Krug1L","--Krug1T","--Krug2L","--Krug2T","--Krug3L","--Krug3T","--Krug4L","--Krug4T"];
-    const [sizeText, setSizesText] = useState([16,9,14,12,12,12,12,16,8,14]);
-    const sizeTextNames = ["--CardZagolovokTextFont","--CardDescriptionFont","--CardDownTextFont","--Krug1FontSize","--Krug2FontSize","--Krug3FontSize","--Krug4FontSize","--CardBackZagolovokTextFont","--CardPerTextFont","--CardBackDownTextFont"];
+    const [sizeText, setSizesText] = useState([16,9,14,12,12,12,12,16,8,14,110]);
+    const sizeTextNames = ["--CardZagolovokTextFont","--CardDescriptionFont","--CardDownTextFont","--Krug1FontSize","--Krug2FontSize","--Krug3FontSize","--Krug4FontSize","--CardBackZagolovokTextFont","--CardPerTextFont","--CardBackDownTextFont","--LineHeight"];
     const [alignValue, setAlignValue] = useState([2,2,2,2,2,2,2]);
     const alignNames = ["--CardZagolovokTextAlign","--CardDescriptionTextAlign","--CardDownTextAlign","--CardBackZagolovokTextAlign","--CardPerTextAlign","--CardBackDescriptionTextAlign","--CardBackDownTextAlign"];
     const [paddingText, setPaddingText] = useState([10,10,10,4,10,4,10,2,13,2,13,2,2,4,10,4,10,2,2,4,4,4,4,2]);
@@ -279,7 +278,6 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
     const [blockAlignValue, setBlockAlignValue] = useState([false]);
     const [blockBorderRadius, setBlockBorderRadius] = useState([false]);
     const [kolvo, setKolvo] = useState([3,3]);
-    const [targetTypeCardNumber, setTargetTypeCardNumber] = useState(0);
     const perepolnen: boolean[] = [];
     const [perepolnenText, setPerepolnenText] = useState('');
     const [startPerepolnen, setStartPerepolnen] = useState(0);
@@ -316,8 +314,20 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
     }
     useEffect(() => {
         let r = '';
+        for (let i = 0; i < colors.length; i++) r = r + colors[i] + ',';
+        for (let i = 0; i < sizePole.length; i++) r = r + sizePole[i] + ',';
+        for (let i = 0; i < minMax.length; i++) r = r + minMax[i] + ',';
+        for (let i = 0; i < sizeText.length; i++) r = r + sizeText[i] + ',';
+        for (let i = 0; i < paddingText.length; i++) r = r + paddingText[i] + ',';
+        for (let i = 0; i < alignValue.length; i++) r = r + alignValue[i] + ',';
+        for (let i = 0; i < borderRadiusValue.length; i++) r = r + borderRadiusValue[i] + ',';
+        r = r + kolvo[0] + ',' + kolvo[1] + ',';
+        r = r + targetBackgroundNumber + ',';
+        r = r + targetSvitokNumber + ',';
+        r = r + targetFont1 + ',';
+        r = r + lineCut + ',';
         setSettingString(r);
-    }, [lineCut, colors, sizePole, minMax, kolvo, targetBackgroundNumber, targetTypeCardNumber, targetFont1]);
+    }, [lineCut, colors, sizePole, minMax, sizeText, paddingText, alignValue, borderRadiusValue, kolvo, targetBackgroundNumber, targetFont1]);
     useEffect(() => {
         document.getElementById("ThisIsColorsConst")?.style.setProperty("--h", String(kolvo[0]) );
         document.getElementById("ThisIsColorsConst")?.style.setProperty("--w", String(kolvo[1]) );
@@ -336,7 +346,7 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
     }, [sizePole]);
     useEffect(() => {
         for (let i = 0; i < sizeTextNames.length; i++) document.getElementById("ThisIsColorsConst")?.style.setProperty(sizeTextNames[i], String(sizeText[i]) + 'px');
-        // document.getElementById("ThisIsColorsConst")?.style.setProperty(sizeTextNames[25], String(sizeText[25] / 100));
+        document.getElementById("ThisIsColorsConst")?.style.setProperty(sizeTextNames[10], String(sizeText[10] / 100));
     }, [sizeText]);
     useEffect(() => {
         for (let i = 0; i < alignNames.length; i++) document.getElementById("ThisIsColorsConst")?.style.setProperty(alignNames[i], String(getAlignText(alignValue[i])));
@@ -357,8 +367,17 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
         M[a] = b;
         const V = [...blockSizePole];
         if (vlog != undefined) V[a] = vlog;
-        if (V[2]) M[2] = M[1];
-        if (V[3]) M[3] = M[1];
+        if (V[5]) M[5] = M[2];
+        if (V[6]) M[6] = M[3];
+        if (V[7]) M[7] = M[4];
+        if (V[8]) M[8] = M[2];
+        if (V[9]) M[9] = M[3];
+        if (V[10]) M[10] = M[4];
+        if (V[11]) M[11] = M[2];
+        if (V[12]) M[12] = M[3];
+        if (V[13]) M[13] = M[4];
+        if (V[14]) M[14] = M[0];
+        if (V[16]) M[16] = M[1];
         setSizesPole(M);
     };
     const setBlocSizePole = (a: number, b: number, bloc: boolean) => {
@@ -372,7 +391,13 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
         M[a] = b;
         const V = [...blockColor];
         if (vlog != undefined) V[a] = vlog;
-        if (V[2]) M[2] = M[0];
+        if (V[2]) M[2] = M[1];
+        if (V[6]) M[6] = M[1];
+        if (V[20]) M[20] = M[1];
+        if (V[21]) M[21] = M[20];
+        if (V[23]) M[23] = M[20];
+        if (V[25]) M[25] = M[4];
+        if (V[27]) M[27] = M[20];
         setColors(M);
     };
     const setBlocColor = (a: number, b: string, bloc: boolean) => {
@@ -386,7 +411,11 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
         M[a] = b;
         const V = [...blockSizeText];
         if (vlog != undefined) V[a] = vlog;
-        //if (V[2]) M[2] = M[1];
+        if (V[4]) M[4] = M[3];
+        if (V[5]) M[5] = M[3];
+        if (V[6]) M[6] = M[3];
+        if (V[7]) M[7] = M[0];
+        if (V[9]) M[9] = M[2];
         setSizesText(M);
     };
     const setBlocSizeText = (a: number, b: number, bloc: boolean) => {
@@ -400,7 +429,6 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
         M[a] = b;
         const V = [...blockAlignValue];
         if (vlog != undefined) V[a] = vlog;
-        //if (V[2]) M[2] = M[1];
         setAlignValue(M);
     };
     const setBlocAlignValue = (a: number, b: number, bloc: boolean) => {
@@ -414,7 +442,6 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
         M[a] = b;
         const V = [...blockPaddingText];
         if (vlog != undefined) V[a] = vlog;
-        //if (V[2]) M[2] = M[1];
         setPaddingText(M);
     };
     const setBlocPaddingText = (a: number, b: number, bloc: boolean) => {
@@ -428,7 +455,6 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
         M[a] = b;
         const V = [...blockBorderRadius];
         if (vlog != undefined) V[a] = vlog;
-        if (V[1]) M[1] = M[0];
         setBorderRadiusValue(M);
     };
     const setBlocBorderRadius = (a: number, b: number, bloc: boolean) => {
@@ -883,7 +909,7 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
                                                     if (cards.length >= kolvo[1] * kolvo[0] * index + kolvo[1] * index2 + kolvo[1] - index3) {
                                                         return (
                                                             <div className={style.Card} key={index*kolvo[1]*kolvo[0] + index2*kolvo[1] + kolvo[1] - index3} >
-                                                                <CardItem targetFont={String(fontMas[targetFont1])} isBack={true} plusPerepolnen = {plusPerepolnen} minMax = {minMax} startPerepolnen={startPerepolnen} keyt={index * kolvo[1] * kolvo[0] + index2 * kolvo[1] + kolvo[1] - index3} Pole={cards[kolvo[1] * kolvo[0] * index + kolvo[1] * index2 + kolvo[1] - index3 -1]} />
+                                                                <CardItem targetFont={String(fontMas[targetFont1])} isBack={true} plusPerepolnen = {plusPerepolnen} minMax = {minMax} startPerepolnen={startPerepolnen} keyt={index * kolvo[1] * kolvo[0] + index2 * kolvo[1] + kolvo[1] - index3-1} Pole={cards[kolvo[1] * kolvo[0] * index + kolvo[1] * index2 + kolvo[1] - index3 -1]} />
                                                             </div>
                                                         );
                                                     }
@@ -1317,6 +1343,81 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
             <div className={style.Options + ' ' + (showOptions ? '' : style.HideWindow)}>
                 <div className={style.Hide}> <div className={style.Text} onClick={() => { setShowOptions(false); }}>Скрыть</div> </div>
                 <div className={style.OpionsCase}>
+                    <input className={style.MyOptionSetting} type="text" value={settingString} onChange={(e) => {
+                        let points = 0, pointe = -1;
+                        const r: string = e.target.value;
+                        let colorsN = [''];
+                        for (let i = 0; i < colors.length; i++) {
+                            points = pointe + 1;
+                            pointe = r.indexOf(',', points);
+                            colorsN[i] =r.slice(points, pointe);
+                        }
+                        setColors(colorsN);
+                        let sizePoleN: number[] = [];
+                        for (let i = 0; i < sizePole.length; i++) {
+                            points = pointe + 1;
+                            pointe = r.indexOf(',', points);
+                            sizePoleN[i] =Number(r.slice(points, pointe));
+                        }
+                        setSizesPole(sizePoleN);
+                        let minMaxN: number[] = [];
+                        for (let i = 0; i < minMax.length; i++) {
+                            points = pointe + 1;
+                            pointe = r.indexOf(',', points);
+                            minMaxN[i] =Number(r.slice(points, pointe));
+                        }
+                        setMinMax(minMaxN);
+                        let sizeTextN: number[] = [];
+                        for (let i = 0; i < sizeText.length; i++) {
+                            points = pointe + 1;
+                            pointe = r.indexOf(',', points);
+                            sizeTextN[i] =Number(r.slice(points, pointe));
+                        }
+                        setSizesText(sizeTextN);
+                        let paddingTextN: number[] = [];
+                        for (let i = 0; i < paddingText.length; i++) {
+                            points = pointe + 1;
+                            pointe = r.indexOf(',', points);
+                            paddingTextN[i] =Number(r.slice(points, pointe));
+                        }
+                        setPaddingText(paddingTextN);
+                        let alignValueN: number[] = [];
+                        for (let i = 0; i < alignValue.length; i++) {
+                            points = pointe + 1;
+                            pointe = r.indexOf(',', points);
+                            alignValueN[i] =Number(r.slice(points, pointe));
+                        }
+                        setAlignValue(alignValueN);
+                        let borderRadiusValueN: number[] = [];
+                        console.log(borderRadiusValue);
+                        for (let i = 0; i < borderRadiusValue.length; i++) {
+                            points = pointe + 1;
+                            pointe = r.indexOf(',', points);
+                            borderRadiusValueN[i] =Number(r.slice(points, pointe));
+                            console.log(r.slice(points, pointe));
+                        }
+                        let KolvoN: number[] = [];
+                        setBorderRadiusValue(borderRadiusValueN);
+                        points = pointe + 1;
+                        pointe = r.indexOf(',', points);
+                        KolvoN[0] = Number(r.slice(points, pointe));
+                        points = pointe + 1;
+                        pointe = r.indexOf(',', points);
+                        KolvoN[1] = Number(r.slice(points, pointe));
+                        setKolvo(KolvoN);
+                        points = pointe + 1;
+                        pointe = r.indexOf(',', points);
+                        setTargetBackgroundNumber(Number(r.slice(points, pointe)));
+                        points = pointe + 1;
+                        pointe = r.indexOf(',', points);
+                        setTargetSvitokNumber(Number(r.slice(points, pointe)));
+                        points = pointe + 1;
+                        pointe = r.indexOf(',', points);
+                        setTargetFont1(Number(r.slice(points, pointe)));
+                        points = pointe + 1;
+                        pointe = r.indexOf(',', points);
+                        setLineCut(r.slice(points, pointe) == 'true' ? true : false);
+                    }} />
                     <OptionCase nameSetting={'Количество на листе'} targetThis={targetOption[1]} setTarget={setTarget} number={1}>
                         <div>
                             <OptionSize text={"По ширине"} size={kolvo[1]} number={1} setSize={setKolv} min={1} max={5} block={false} setBlock={undefined} />
@@ -1347,11 +1448,11 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
                         <div>
                             <OptionColor text={"Фон листа"} color={colors[0]} number={0} setColor={setColor} block={blockColor[0]} setBlock={setBlocColor} name={colorsNames[0]} />
                             <OptionColor text={"Лицо. Края карточки"} color={colors[1]} number={1} setColor={setColor} block={blockColor[1]} setBlock={setBlocColor} name={colorsNames[1]} />
-                            <OptionColor text={"Лицо. Фон заголовка"} color={colors[2]} number={2} setColor={setColor} block={blockColor[2]} setBlock={setBlocColor} name={colorsNames[2]} />
+                            <OptionColor text={"Лицо. Фон заголовка"} textAs={"Как края"} color={colors[2]} number={2} setColor={setColor} block={blockColor[2]} setBlock={setBlocColor} name={colorsNames[2]} />
                             <OptionColor text={"Лицо. Заголовок"} color={colors[3]} number={3} setColor={setColor} block={blockColor[3]} setBlock={setBlocColor} name={colorsNames[3]} />
                             <OptionColor text={"Лицо. Фон внутренности"} color={colors[4]} number={4} setColor={setColor} block={blockColor[4]} setBlock={setBlocColor} name={colorsNames[4]} />
                             <OptionColor text={"Лицо. Описание"} color={colors[5]} number={5} setColor={setColor} block={blockColor[5]} setBlock={setBlocColor} name={colorsNames[5]} />
-                            <OptionColor text={"Лицо. Фон подписи"} color={colors[6]} number={6} setColor={setColor} block={blockColor[6]} setBlock={setBlocColor} name={colorsNames[6]} />
+                            <OptionColor text={"Лицо. Фон подписи"} textAs={"Как края"} color={colors[6]} number={6} setColor={setColor} block={blockColor[6]} setBlock={setBlocColor} name={colorsNames[6]} />
                             <OptionColor text={"Лицо. Подпись"} color={colors[7]} number={7} setColor={setColor} block={blockColor[7]} setBlock={setBlocColor} name={colorsNames[7]} />
                             <OptionColor text={"Круг1. Обводка"} color={colors[8]} number={8} setColor={setColor} block={blockColor[8]} setBlock={setBlocColor} name={colorsNames[8]} />
                             <OptionColor text={"Круг1. Фон"} color={colors[9]} number={9} setColor={setColor} block={blockColor[9]} setBlock={setBlocColor} name={colorsNames[9]} />
@@ -1365,14 +1466,14 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
                             <OptionColor text={"Круг4. Обводка"} color={colors[17]} number={17} setColor={setColor} block={blockColor[17]} setBlock={setBlocColor} name={colorsNames[17]} />
                             <OptionColor text={"Круг4. Фон"} color={colors[18]} number={18} setColor={setColor} block={blockColor[18]} setBlock={setBlocColor} name={colorsNames[18]} />
                             <OptionColor text={"Круг4. Текст"} color={colors[19]} number={19} setColor={setColor} block={blockColor[19]} setBlock={setBlocColor} name={colorsNames[19]} />
-                            <OptionColor text={"Рубаха. Края карточки"} color={colors[20]} number={20} setColor={setColor} block={blockColor[20]} setBlock={setBlocColor} name={colorsNames[20]} />
-                            <OptionColor text={"Рубаха. Фон заголовка"} color={colors[21]} number={21} setColor={setColor} block={blockColor[21]} setBlock={setBlocColor} name={colorsNames[21]} />
+                            <OptionColor text={"Рубаха. Края карточки"} textAs={"Как лицо"} color={colors[20]} number={20} setColor={setColor} block={blockColor[20]} setBlock={setBlocColor} name={colorsNames[20]} />
+                            <OptionColor text={"Рубаха. Фон заголовка"} textAs={"Как края"} color={colors[21]} number={21} setColor={setColor} block={blockColor[21]} setBlock={setBlocColor} name={colorsNames[21]} />
                             <OptionColor text={"Рубаха. Заголовок"} color={colors[22]} number={22} setColor={setColor} block={blockColor[22]} setBlock={setBlocColor} name={colorsNames[22]} />
-                            <OptionColor text={"Рубаха. Фон перекладины"} color={colors[23]} number={23} setColor={setColor} block={blockColor[23]} setBlock={setBlocColor} name={colorsNames[23]} />
+                            <OptionColor text={"Рубаха. Фон перекладины"} textAs={"Как края"} color={colors[23]} number={23} setColor={setColor} block={blockColor[23]} setBlock={setBlocColor} name={colorsNames[23]} />
                             <OptionColor text={"Рубаха. Перекладина"} color={colors[24]} number={24} setColor={setColor} block={blockColor[24]} setBlock={setBlocColor} name={colorsNames[24]} />
-                            <OptionColor text={"Рубаха. Фон описания"} color={colors[25]} number={25} setColor={setColor} block={blockColor[25]} setBlock={setBlocColor} name={colorsNames[25]} />
-                            <OptionColor text={"Рубаха. Текст описания"} color={colors[26]} number={26} setColor={setColor} block={blockColor[26]} setBlock={setBlocColor} name={colorsNames[26]} />
-                            <OptionColor text={"Рубаха. Фон подписи"} color={colors[27]} number={27} setColor={setColor} block={blockColor[27]} setBlock={setBlocColor} name={colorsNames[27]} />
+                            <OptionColor text={"Рубаха. Фон описания"} textAs={"Как лицо"}  color={colors[25]} number={25} setColor={setColor} block={blockColor[25]} setBlock={setBlocColor} name={colorsNames[25]} />
+                            <OptionColor text={"Рубаха. Текст описания"}color={colors[26]} number={26} setColor={setColor} block={blockColor[26]} setBlock={setBlocColor} name={colorsNames[26]} />
+                            <OptionColor text={"Рубаха. Фон подписи"} textAs={"Как края"} color={colors[27]} number={27} setColor={setColor} block={blockColor[27]} setBlock={setBlocColor} name={colorsNames[27]} />
                             <OptionColor text={"Рубаха. Текст подписи"} color={colors[28]} number={28} setColor={setColor} block={blockColor[28]} setBlock={setBlocColor} name={colorsNames[28]} />
                         </div>
                     </OptionCase>
@@ -1383,18 +1484,18 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
                             <OptionSize text={"Круг1. Ширина"} size={sizePole[2]} number={2} setSize={setSizePole} min={0} max={99} block={blockSizePole[2]} setBlock={setBlocSizePole} />
                             <OptionSize text={"Круг1. Высота"} size={sizePole[3]} number={3} setSize={setSizePole} min={0} max={99} block={blockSizePole[3]} setBlock={setBlocSizePole} />
                             <OptionSize text={"Круг1. Обводка"} size={sizePole[4]} number={4} setSize={setSizePole} min={0} max={30} block={blockSizePole[4]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг2. Ширина"} size={sizePole[5]} number={5} setSize={setSizePole} min={0} max={99} block={blockSizePole[5]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг2. Высота"} size={sizePole[6]} number={6} setSize={setSizePole} min={0} max={99} block={blockSizePole[6]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг2. Обводка"} size={sizePole[7]} number={7} setSize={setSizePole} min={0} max={30} block={blockSizePole[7]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг3. Ширина"} size={sizePole[8]} number={8} setSize={setSizePole} min={0} max={99} block={blockSizePole[8]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг3. Высота"} size={sizePole[9]} number={9} setSize={setSizePole} min={0} max={99} block={blockSizePole[9]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг3. Обводка"} size={sizePole[10]} number={10} setSize={setSizePole} min={0} max={30} block={blockSizePole[10]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг4. Ширина"} size={sizePole[11]} number={11} setSize={setSizePole} min={0} max={99} block={blockSizePole[11]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг4. Высота"} size={sizePole[12]} number={12} setSize={setSizePole} min={0} max={99} block={blockSizePole[12]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг4. Обводка"} size={sizePole[13]} number={13} setSize={setSizePole} min={0} max={30} block={blockSizePole[13]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Рубаха. Заголовок"} size={sizePole[14]} number={14} setSize={setSizePole} min={0} max={49} block={blockSizePole[14]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг2. Ширина"} textAs={"Как 1"} size={sizePole[5]} number={5} setSize={setSizePole} min={0} max={99} block={blockSizePole[5]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг2. Высота"} textAs={"Как 1"} size={sizePole[6]} number={6} setSize={setSizePole} min={0} max={99} block={blockSizePole[6]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг2. Обводка"} textAs={"Как 1"} size={sizePole[7]} number={7} setSize={setSizePole} min={0} max={30} block={blockSizePole[7]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг3. Ширина"} textAs={"Как 1"} size={sizePole[8]} number={8} setSize={setSizePole} min={0} max={99} block={blockSizePole[8]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг3. Высота"} textAs={"Как 1"} size={sizePole[9]} number={9} setSize={setSizePole} min={0} max={99} block={blockSizePole[9]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг3. Обводка"} textAs={"Как 1"} size={sizePole[10]} number={10} setSize={setSizePole} min={0} max={30} block={blockSizePole[10]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг4. Ширина"} textAs={"Как 1"} size={sizePole[11]} number={11} setSize={setSizePole} min={0} max={99} block={blockSizePole[11]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг4. Высота"} textAs={"Как 1"} size={sizePole[12]} number={12} setSize={setSizePole} min={0} max={99} block={blockSizePole[12]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг4. Обводка"} textAs={"Как 1"} size={sizePole[13]} number={13} setSize={setSizePole} min={0} max={30} block={blockSizePole[13]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Рубаха. Заголовок"} textAs={"Как лицо"} size={sizePole[14]} number={14} setSize={setSizePole} min={0} max={49} block={blockSizePole[14]} setBlock={setBlocSizePole} />
                             <OptionSize text={"Рубаха. Перекладина"} size={sizePole[15]} number={15} setSize={setSizePole} min={0} max={49} block={blockSizePole[15]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Рубаха. Подпись"} size={sizePole[16]} number={16} setSize={setSizePole} min={0} max={49} block={blockSizePole[16]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Рубаха. Подпись"} textAs={"Как лицо"} size={sizePole[16]} number={16} setSize={setSizePole} min={0} max={49} block={blockSizePole[16]} setBlock={setBlocSizePole} />
                             <div className={style.NumbersExists}><div className={style.Exists} onClick={() => {setLineCut(!lineCut)}}> {"___"} {lineCut && <div/>}</div> <p>{"Линия разрезки (лицо)"}</p> </div>
                             <OptionSize text={"мм Высота листа"} size={sizePole[17]} number={17} setSize={setSizePole} min={50} max={500} block={blockSizePole[17]} setBlock={setBlocSizePole} />
                             <OptionSize text={"мм Ширина листа"} size={sizePole[18]} number={18} setSize={setSizePole} min={50} max={500} block={blockSizePole[18]} setBlock={setBlocSizePole} />
@@ -1412,7 +1513,7 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
                         <div>
                             <OptionSize text={"Круг 1. Горизонталь"} size={sizePole[19]} number={19} setSize={setSizePole} min={0} max={500} block={blockSizePole[19]} setBlock={setBlocSizePole} />
                             <OptionSize text={"Круг 1. Вертикаль"} size={sizePole[20]} number={20} setSize={setSizePole} min={0} max={500} block={blockSizePole[20]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг 2. Горизонталь"} size={sizePole[21]} number={21} setSize={setSizePole} min={0} max={500} block={blockSizePole[21]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг 2. Горизонталь"}size={sizePole[21]} number={21} setSize={setSizePole} min={0} max={500} block={blockSizePole[21]} setBlock={setBlocSizePole} />
                             <OptionSize text={"Круг 2. Вертикаль"} size={sizePole[22]} number={22} setSize={setSizePole} min={0} max={500} block={blockSizePole[22]} setBlock={setBlocSizePole} />
                             <OptionSize text={"Круг 3. Горизонталь"} size={sizePole[23]} number={23} setSize={setSizePole} min={0} max={500} block={blockSizePole[23]} setBlock={setBlocSizePole} />
                             <OptionSize text={"Круг 3. Вертикаль"} size={sizePole[24]} number={24} setSize={setSizePole} min={0} max={500} block={blockSizePole[24]} setBlock={setBlocSizePole} />
@@ -1427,12 +1528,12 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
                             <OptionSize text={"Лицо. Описание"} size={sizeText[1]} number={1} setSize={setSizeText} min={0} max={99} block={blockSizeText[1]} setBlock={setBlocSizeText} />
                             <OptionSize text={"Лицо. Подпись"} size={sizeText[2]} number={2} setSize={setSizeText} min={0} max={99} block={blockSizeText[2]} setBlock={setBlocSizeText} />
                             <OptionSize text={"Круг 1"} size={sizeText[3]} number={3} setSize={setSizeText} min={0} max={99} block={blockSizeText[3]} setBlock={setBlocSizeText} />
-                            <OptionSize text={"Круг 2"} size={sizeText[4]} number={4} setSize={setSizeText} min={0} max={99} block={blockSizeText[4]} setBlock={setBlocSizeText} />
-                            <OptionSize text={"Круг 3"} size={sizeText[5]} number={5} setSize={setSizeText} min={0} max={99} block={blockSizeText[5]} setBlock={setBlocSizeText} />
-                            <OptionSize text={"Круг 4"} size={sizeText[6]} number={6} setSize={setSizeText} min={0} max={99} block={blockSizeText[6]} setBlock={setBlocSizeText} />
-                            <OptionSize text={"Рубаха. Заголовок"} size={sizeText[7]} number={7} setSize={setSizeText} min={0} max={99} block={blockSizeText[7]} setBlock={setBlocSizeText} />
+                            <OptionSize text={"Круг 2"} textAs={"Как 1"} size={sizeText[4]} number={4} setSize={setSizeText} min={0} max={99} block={blockSizeText[4]} setBlock={setBlocSizeText} />
+                            <OptionSize text={"Круг 3"} textAs={"Как 1"} size={sizeText[5]} number={5} setSize={setSizeText} min={0} max={99} block={blockSizeText[5]} setBlock={setBlocSizeText} />
+                            <OptionSize text={"Круг 4"} textAs={"Как 1"} size={sizeText[6]} number={6} setSize={setSizeText} min={0} max={99} block={blockSizeText[6]} setBlock={setBlocSizeText} />
+                            <OptionSize text={"Рубаха. Заголовок"} textAs={"Как лицо"} size={sizeText[7]} number={7} setSize={setSizeText} min={0} max={99} block={blockSizeText[7]} setBlock={setBlocSizeText} />
                             <OptionSize text={"Рубаха. Перекладина"}  size={sizeText[8]} number={8} setSize={setSizeText} min={0} max={99} block={blockSizeText[8]} setBlock={setBlocSizeText} />
-                            <OptionSize text={"Рубаха. Подпись"} size={sizeText[9]} number={9} setSize={setSizeText} min={0} max={99} block={blockSizeText[9]} setBlock={setBlocSizeText} />
+                            <OptionSize text={"Рубаха. Подпись"} textAs={"Как лицо"} size={sizeText[9]} number={9} setSize={setSizeText} min={0} max={99} block={blockSizeText[9]} setBlock={setBlocSizeText} />
                         </div>
                     </OptionCase>
                     <OptionCase nameSetting={'Положение текста'} targetThis={targetOption[8]} setTarget={setTarget} number={8}>
@@ -1452,9 +1553,9 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
                             <OptionSize text={"Боковые поля листа"} size={paddingText[1]} number={1} setSize={setPaddinText} min={0} max={400} block={blockPaddingText[1]} setBlock={setBlocPaddingText} />
                             <OptionSize text={"Нижнее поле листа"} size={paddingText[2]} number={2} setSize={setPaddinText} min={0} max={400} block={blockPaddingText[2]} setBlock={setBlocPaddingText} />
                             <OptionSize text={"Лицо. Обводка карточки верх"} size={paddingText[3]} number={3} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[3]} setBlock={setBlocPaddingText} />
-                            <OptionSize text={"Лицо. Об карточки право"} size={paddingText[4]} number={4} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[4]} setBlock={setBlocPaddingText} />
-                            <OptionSize text={"Лицо. Об карточки низ"} size={paddingText[5]} number={5} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[5]} setBlock={setBlocPaddingText} />
-                            <OptionSize text={"Лицо. Об карточки лево"} size={paddingText[6]} number={6} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[6]} setBlock={setBlocPaddingText} />
+                            <OptionSize text={"Лицо. Обводка карточки право"} size={paddingText[4]} number={4} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[4]} setBlock={setBlocPaddingText} />
+                            <OptionSize text={"Лицо. Обводка карточки низ"} size={paddingText[5]} number={5} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[5]} setBlock={setBlocPaddingText} />
+                            <OptionSize text={"Лицо. Обводка карточки лево"} size={paddingText[6]} number={6} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[6]} setBlock={setBlocPaddingText} />
                             <OptionSize text={"Лицо. Заголовок"} size={paddingText[7]} number={7} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[7]} setBlock={setBlocPaddingText} />
                             <OptionSize text={"Лицо. Описание верх"} size={paddingText[8]} number={8} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[8]} setBlock={setBlocPaddingText} />
                             <OptionSize text={"Лицо. Описание право"} size={paddingText[9]} number={9} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[9]} setBlock={setBlocPaddingText} />
@@ -1462,9 +1563,9 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
                             <OptionSize text={"Лицо. Описание лево"} size={paddingText[11]} number={11} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[11]} setBlock={setBlocPaddingText} />
                             <OptionSize text={"Лицо. Подпись"} size={paddingText[12]} number={12} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[12]} setBlock={setBlocPaddingText} />
                             <OptionSize text={"Рубаха. Обводка карточки верх"} size={paddingText[13]} number={13} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[13]} setBlock={setBlocPaddingText} />
-                            <OptionSize text={"Рубаха. Об карточки право"} size={paddingText[14]} number={14} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[14]} setBlock={setBlocPaddingText} />
-                            <OptionSize text={"Рубаха. Об карточки низ"} size={paddingText[15]} number={15} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[15]} setBlock={setBlocPaddingText} />
-                            <OptionSize text={"Рубаха. Об карточки лево"} size={paddingText[16]} number={16} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[16]} setBlock={setBlocPaddingText} />
+                            <OptionSize text={"Рубаха. Обводка карточки право"} size={paddingText[14]} number={14} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[14]} setBlock={setBlocPaddingText} />
+                            <OptionSize text={"Рубаха. Обводка карточки низ"} size={paddingText[15]} number={15} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[15]} setBlock={setBlocPaddingText} />
+                            <OptionSize text={"Рубаха. Обводка карточки лево"} size={paddingText[16]} number={16} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[16]} setBlock={setBlocPaddingText} />
                             <OptionSize text={"Рубаха. Заголовок"} size={paddingText[17]} number={17} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[17]} setBlock={setBlocPaddingText} />
                             <OptionSize text={"Рубаха. Перекладина"} size={paddingText[18]} number={18} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[18]} setBlock={setBlocPaddingText} />
                             <OptionSize text={"Рубаха. Описание верх"} size={paddingText[19]} number={19} setSize={setPaddinText} min={0} max={199} block={blockPaddingText[19]} setBlock={setBlocPaddingText} />
@@ -1524,7 +1625,7 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
                     </OptionCase>
                     <OptionCase nameSetting={'Подгонка описания'} targetThis={targetOption[11]} setTarget={setTarget} number={11}>
                         <div>
-                            <OptionSize text={"% Высота строки (от 0 до 200)"} size={sizeText[25]} number={25} setSize={setSizeText} min={0} max={200} block={blockSizeText[25]} setBlock={setBlocSizeText} />
+                            <OptionSize text={"% Высота строки (от 0 до 200)"} size={sizeText[10]} number={10} setSize={setSizeText} min={0} max={200} block={blockSizeText[10]} setBlock={setBlocSizeText} />
                             <OptionSize text={"Минимумальный размер"} size={minMax[0]} number={0} setSize={setMinMaxs} min={0} max={blockMinMax ? 99 : minMax[1]} block={false} setBlock={setBlocMinMax} />
                             <OptionSize textAs={"Как минимум"} text={"Максимум"} size={minMax[1]} number={1} setSize={setMinMaxs} min={minMax[0]} max={99} block={blockMinMax} setBlock={setBlocMinMax} />
                             <div className={style.ButtonMinMax} onClick={() => {

@@ -110,7 +110,9 @@
     .Description {
         div {
             width: 100%;
+            padding: var(--CardBackDescriptionPaddingT) var(--CardBackDescriptionPaddingR) var(--CardBackDescriptionPaddingB) var(--CardBackDescriptionPaddingL);
         }
+        line-height: var(--LineHeight);
         border-top-right-radius: var(--CardBackInside┐);
         border-top-left-radius: var(--CardBackInside┌);
         border-bottom-right-radius: var(--CardBackInside┘);
@@ -126,7 +128,6 @@
         width: 100%;
         font-size: var(--CardBackDescriptionFont);
         color: var(--CardBackDescriptionColor);
-        padding: var(--CardBackDescriptionPaddingT) var(--CardBackDescriptionPaddingR) var(--CardBackDescriptionPaddingB) var(--CardBackDescriptionPaddingL);
     }
     .DowtText {
         overflow: hidden;
@@ -200,7 +201,6 @@
             left: 0;
             div {
                 z-index: 1;
-                height: max-content;
                 width: 100%;
             }
             white-space: pre-wrap;
