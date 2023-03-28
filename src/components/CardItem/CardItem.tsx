@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import style from './CardItem.module.scss';
-import Sapogi from '../../images/CardsImages/Сапоги.png'
 type AlertProps = {
-    cardType: number;
     Pole: string[];
     keyt: number;
     plusPerepolnen?: (num:number, bol:boolean) => void;
     minMax?: number[];
     startPerepolnen?: number;
     isBack?: boolean;
-    children?: JSX.Element[];
-    NumbersExist?: boolean[];
     targetFont: string;
-    setPole?: (text: string[]) => void;
+    cardImg?: string;
+    svitok?: string;
 };
-const Card = ({setPole, targetFont, NumbersExist, isBack, keyt, cardType, Pole, minMax, plusPerepolnen, startPerepolnen, children}: AlertProps): JSX.Element => {
+const Card = ({svitok,cardImg, targetFont, isBack, keyt, Pole, minMax, plusPerepolnen, startPerepolnen}: AlertProps): JSX.Element => {
     let descriptionMain, descriptionText;
     useEffect(() => {
         descriptionMain = document.getElementById("Card " + keyt);
@@ -34,32 +31,32 @@ const Card = ({setPole, targetFont, NumbersExist, isBack, keyt, cardType, Pole, 
             }
         }
     }, [startPerepolnen]);
-    const getPole = (num: number) => {
-        return (Pole[num]);
-    };
     if (isBack) {
         return (
             <div className={style.MainBack + ' ' + style[targetFont]}>
-                <div className={style.Inside}>
-                    <div>
-                        <div className={style.Zagolovok}><div>{"Сапоги-скороходы"}</div></div>
-                        <div className={style.Per}><div>{"Снаряжение"}</div></div>
-                    </div>
-                    <div className={style.Description}><div>{"Выглядят как обычные сапоги, но на самом деле увеличивают вашу скорость вдвое"}</div></div>
-                </div>
-                <div className={style.DowtText}><div>{""}</div></div>
+                <div className={style.Zagolovok}><div>{Pole[9]}</div></div>
+                <div className={style.Per}><div>{Pole[10]}</div></div>
+                <div className={style.Description} id={"Card " + keyt}><div id = {"CardControl " + keyt}>{Pole[11]}</div></div>
+                <div className={style.DowtText}><div>{Pole[12]}</div></div>
             </div>
         );
     }
     else {
         return (
             <div className={style.Main + ' ' + style[targetFont]}>
-                <div className={style.Zagolovok}><div>{"Сапоги"}</div></div>
+                <div className={style.Zagolovok}><div>{Pole[0]}</div></div>
                 <div className={style.Inside}>
-                    <img src={Sapogi} alt="" />
-                    <div className={style.Description}><div>{"Выглядят как обычные сапоги"}</div></div>
+                    <img src={cardImg} alt="" />
+                    {Pole[3]!="" ? <div className={style.Description}>
+                        <img src={svitok} alt="" />
+                        <div>{Pole[3]}</div>
+                    </div> : null}
+                    {Pole[5]!="" ? <div className={style.Krug + ' ' + style.Krug1}><div>{Pole[5]}</div></div>: null}
+                    {Pole[6]!="" ? <div className={style.Krug + ' ' + style.Krug2}><div>{Pole[6]}</div></div>: null}
+                    {Pole[7]!="" ? <div className={style.Krug + ' ' + style.Krug3}><div>{Pole[7]}</div></div>: null}
+                    {Pole[8]!="" ? <div className={style.Krug + ' ' + style.Krug4}><div>{Pole[8]}</div></div>: null}
                 </div>
-                <div className={style.DowtText}><div>{""}</div></div>
+                <div className={style.DowtText}><div>{Pole[4]}</div></div>
             </div>
         );
     }

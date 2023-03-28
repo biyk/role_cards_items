@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { ReactComponent as Change } from './images/Change.svg';
 import style from './App.module.scss';
-import SpellMain from './components/SpellMain/SpellMain';
+import ItemMain from './components/ItemMain/ItemMain';
 import { ReactComponent as GH } from './images/GH.svg';
 import { ReactComponent as YD } from './images/YD.svg';
 import { ReactComponent as VK } from './images/VK.svg';
@@ -77,7 +77,7 @@ const App = () => {
                 {showMyOpis[2] ? <div className={style.Opis}>{"Яндекс диск\nЗдесь лежат картинки"}</div> : null}
             </div>
             <div className={style.Window}>
-                <SpellMain />
+                <ItemMain />
             </div>
         </div>
     );
