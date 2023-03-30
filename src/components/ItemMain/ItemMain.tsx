@@ -242,6 +242,7 @@ import OptionCase from '../OptionCase/OptionCase';
 import OptionSize from '../OptionSize/OptionSize';
 import OptionColor from '../OptionColor/OptionColor';
 import OptionAllain from '../OptionAllain/OptionAllain';
+import BaseTip from '../BaseTip/BaseTip';
 type AlertProps = {
 };
 const SpellMain = ({ }: AlertProps): JSX.Element => {
@@ -257,17 +258,17 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
     const [pytSvitok, setPytSvitok] = useState<File[]|undefined[]>([]);
     const [openThisBaseCase, setOpenThisBaseCase] = useState([false, false, false, false, false, false, false, false]);
     const [targetOption, setTargetOptions] = useState([false, false, false, false, false, false, false, false, false, false, false]);
-    const [colors, setColors] = useState(["#ffffff","#9C0000","#9C0000","#ffffff","#fff2d6","#000000","#9C0000","#FFFFFF","#BE431E","#AF5E5E","#FFFFFF","#BE431E","#AF5E5E","#FFFFFF","#BE431E","#AF5E5E","#FFFFFF","#BE431E","#AF5E5E","#FFFFFF","#9C0000","#fff2d6","#000000","#9C0000","#FFFFFF","#fff2d6","#000000","#9C0000","#FFFFFF"]);
+    const [colors, setColors] = useState(["#ffffff","#9C0000","#9C0000","#ffffff","#fff2d6","#000000","#9C0000","#FFFFFF","#BE431E","#ffe294","#000000","#BE431E","#AF5E5E","#FFFFFF","#BE431E","#AF5E5E","#FFFFFF","#BE431E","#AF5E5E","#FFFFFF","#9C0000","#fff2d6","#000000","#9C0000","#FFFFFF","#fff2d6","#000000","#9C0000","#FFFFFF"]);
     const colorsNames = ["--ListColor","--CardColorObvodka","--CardZagolovokBackgroundColor","--CardZagolovokTextColor","--CardDescriptionBackgroundColor","--CardDescriptionColor","--CardDownBackgroundColor","--CardDownTextColor","--Krug1BorderColor","--Krug1BackgroundColor","--Krug1TextColor","--Krug2BorderColor","--Krug2BackgroundColor","--Krug2TextColor","--Krug3BorderColor","--Krug3BackgroundColor","--Krug3TextColor","--Krug4BorderColor","--Krug4BackgroundColor","--Krug4TextColor","--CardBackColorObvodka","--CardBackZagolovokBackgroundColor","--CardBackZagolovokTextColor","--CardPerBackgroundColor","--CardPerTextColor","--CardBackDescriptionBackgroundColor","--CardBackDescriptionColor","--CardBackDownBackgroundColor","--CardBackDownTextColor"];
-    const [sizePole, setSizesPole] = useState([18,15,40,40,2,40,40,2,40,40,2,40,40,2,18,15,15,297,210,30,30,130,30,30,130,130,130]);
+    const [sizePole, setSizesPole] = useState([35,15,53,53,2,53,53,2,53,53,2,53,53,2,35,15,15,297,210,173,13,173,78,40,13,40,78]);
     const sizePoleNames = ["--CardZagolovokTextSize","--CardDownTextSize","--Krug1W","--Krug1H","--Krug1Bordersize","--Krug2W","--Krug2H","--Krug2Bordersize","--Krug3W","--Krug3H","--Krug3Bordersize","--Krug4W","--Krug4H","--Krug4Bordersize","--CardBackZagolovokTextSize","--CardPerTextSize","--CardBackDownTextSize","--ListH","--ListW","--Krug1L","--Krug1T","--Krug2L","--Krug2T","--Krug3L","--Krug3T","--Krug4L","--Krug4T"];
     const [sizeText, setSizesText] = useState([16,9,14,12,12,12,12,16,8,14,110]);
     const sizeTextNames = ["--CardZagolovokTextFont","--CardDescriptionFont","--CardDownTextFont","--Krug1FontSize","--Krug2FontSize","--Krug3FontSize","--Krug4FontSize","--CardBackZagolovokTextFont","--CardPerTextFont","--CardBackDownTextFont","--LineHeight"];
-    const [alignValue, setAlignValue] = useState([2,2,2,2,2,2,2]);
+    const [alignValue, setAlignValue] = useState([2,2,2,2,2,4,2]);
     const alignNames = ["--CardZagolovokTextAlign","--CardDescriptionTextAlign","--CardDownTextAlign","--CardBackZagolovokTextAlign","--CardPerTextAlign","--CardBackDescriptionTextAlign","--CardBackDownTextAlign"];
-    const [paddingText, setPaddingText] = useState([10,10,10,4,10,4,10,2,13,2,13,2,2,4,10,4,10,2,2,4,4,4,4,2]);
+    const [paddingText, setPaddingText] = useState([10,10,10,0,10,4,10,2,13,23,13,23,2,6,10,4,10,2,2,4,4,4,4,2]);
     const paddingNames = ["--ListPaddingT","--ListPaddingBok","--ListPaddingB","--CardPaddingT","--CardPaddingR","--CardPaddingB","--CardPaddingL","--CardZagolovokTextPadding","--CardDescriptionPaddingT","--CardDescriptionPaddingR","--CardDescriptionPaddingB","--CardDescriptionPaddingL","--CardDownTextPadding","--CardBackPaddingT","--CardBackPaddingR","--CardBackPaddingB","--CardBackPaddingL","--CardBackZagolovokTextPadding","--CardPerTextPadding","--CardBackDescriptionPaddingT","--CardBackDescriptionPaddingR","--CardBackDescriptionPaddingB","--CardBackDescriptionPaddingL","--CardBackDownTextPadding"];
-    const [borderRadiusValue, setBorderRadiusValue] = useState([11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11]);
+    const [borderRadiusValue, setBorderRadiusValue] = useState([11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,25,25,25,25,0,0,0,0,11,11,11,11,11,11,11,11]);
     const bordwrRadiusNames = ["--CardZagolovok┌", "--CardZagolovok┐", "--CardZagolovok┘", "--CardZagolovok└","--CardInside┌","--CardInside┐","--CardInside┘","--CardInside└","--CardDown┌","--CardDown┐","--CardDown┘","--CardDown└","--CardBackZagolovok┌","--CardBackZagolovok┐","--CardBackZagolovok┘","--CardBackZagolovok└","--CardBackPer┌","--CardBackPer┐","--CardBackPer┘","--CardBackPer└","--CardBackInside┌","--CardBackInside┐","--CardBackInside┘","--CardBackInside└","--CardBackDown┌","--CardBackDown┐","--CardBackDown┘","--CardBackDown└","--Krug1┌","--Krug1┐","--Krug1┘","--Krug1└","--Krug2┌","--Krug2┐","--Krug2┘","--Krug2└","--Krug3┌","--Krug3┐","--Krug3┘","--Krug3└","--Krug4┌","--Krug4┐","--Krug4┘","--Krug4└"];
     const [minMax, setMinMax] = useState([8, 12]);
     const [blockMinMax, setBlockMinMax] = useState(false);
@@ -289,8 +290,8 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
     const [settingString, setSettingString] = useState("");
     const [rubahaCaseNumber, setRubahaCaseNumber] = useState(9);
     const [svitokCaseNumber, setSvitokCaseNumber] = useState(1);
-    const [targetBackgroundNumber, setTargetBackgroundNumber] = useState(5);
-    const [targetSvitokNumber, setTargetSvitokNumber] = useState(1);
+    const [targetBackgroundNumber, setTargetBackgroundNumber] = useState(74);
+    const [targetSvitokNumber, setTargetSvitokNumber] = useState(2);
     const [needUpdate, setNeedUpdate] = useState(false);
     const setTarget = (a: number, b: boolean) => {
         const M = [];
@@ -455,6 +456,39 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
         M[a] = b;
         const V = [...blockBorderRadius];
         if (vlog != undefined) V[a] = vlog;
+        if (V[1]) M[1] = M[0];
+        if (V[2]) M[2] = M[0];
+        if (V[3]) M[3] = M[0];
+        if (V[5]) M[5] = M[4];
+        if (V[6]) M[6] = M[4];
+        if (V[7]) M[7] = M[4];
+        if (V[9]) M[9] = M[8];
+        if (V[10]) M[10] = M[8];
+        if (V[11]) M[11] = M[8];
+        if (V[13]) M[13] = M[12];
+        if (V[14]) M[14] = M[12];
+        if (V[15]) M[15] = M[12];
+        if (V[17]) M[17] = M[16];
+        if (V[18]) M[18] = M[16];
+        if (V[19]) M[19] = M[16];
+        if (V[21]) M[21] = M[20];
+        if (V[22]) M[22] = M[20];
+        if (V[23]) M[23] = M[20];
+        if (V[25]) M[25] = M[24];
+        if (V[26]) M[26] = M[24];
+        if (V[27]) M[27] = M[24];
+        if (V[29]) M[29] = M[28];
+        if (V[30]) M[30] = M[28];
+        if (V[31]) M[31] = M[28];
+        if (V[33]) M[33] = M[32];
+        if (V[34]) M[34] = M[32];
+        if (V[35]) M[35] = M[32];
+        if (V[37]) M[37] = M[36];
+        if (V[38]) M[38] = M[36];
+        if (V[39]) M[39] = M[36];
+        if (V[41]) M[41] = M[40];
+        if (V[42]) M[42] = M[40];
+        if (V[43]) M[43] = M[40];
         setBorderRadiusValue(M);
     };
     const setBlocBorderRadius = (a: number, b: number, bloc: boolean) => {
@@ -486,23 +520,6 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
         const K = [...kolvo];
         K[a] = b;
         setKolvo(K);
-    };
-    const setOpenThisBas = ( level: number, numbers: number[], name: string) => {
-        type sp = {
-            0: string[],
-        };
-        const spells: sp = {
-            0: [],
-        };
-        let A = '';
-        if (numbers.length != 0) {
-            A = spells[level as keyof sp][0];
-            for (let i = 0; i < numbers.length - 1; i++) {
-                A = A + '\n' + spells[level as keyof sp][numbers[i]];
-            }
-        }
-        setCSV(A.replaceAll('#####', name));
-        setMakeCSV(makeCSV + 1);
     };
     const plusPerepolnen = (num: number, bool: boolean) => {
         if(num == -1) perepolnen[0] = bool;
@@ -1481,17 +1498,17 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
                         <div>
                             <OptionSize text={"Лицо. Заголовок"} size={sizePole[0]} number={0} setSize={setSizePole} min={0} max={99} block={blockSizePole[0]} setBlock={setBlocSizePole} />
                             <OptionSize text={"Лицо. Подпись"} size={sizePole[1]} number={1} setSize={setSizePole} min={0} max={49} block={blockSizePole[1]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг1. Ширина"} size={sizePole[2]} number={2} setSize={setSizePole} min={0} max={99} block={blockSizePole[2]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг1. Высота"} size={sizePole[3]} number={3} setSize={setSizePole} min={0} max={99} block={blockSizePole[3]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг1. Ширина"} size={sizePole[2]} number={2} setSize={setSizePole} min={0} max={199} block={blockSizePole[2]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг1. Высота"} size={sizePole[3]} number={3} setSize={setSizePole} min={0} max={199} block={blockSizePole[3]} setBlock={setBlocSizePole} />
                             <OptionSize text={"Круг1. Обводка"} size={sizePole[4]} number={4} setSize={setSizePole} min={0} max={30} block={blockSizePole[4]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг2. Ширина"} textAs={"Как 1"} size={sizePole[5]} number={5} setSize={setSizePole} min={0} max={99} block={blockSizePole[5]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг2. Высота"} textAs={"Как 1"} size={sizePole[6]} number={6} setSize={setSizePole} min={0} max={99} block={blockSizePole[6]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг2. Ширина"} textAs={"Как 1"} size={sizePole[5]} number={5} setSize={setSizePole} min={0} max={199} block={blockSizePole[5]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг2. Высота"} textAs={"Как 1"} size={sizePole[6]} number={6} setSize={setSizePole} min={0} max={199} block={blockSizePole[6]} setBlock={setBlocSizePole} />
                             <OptionSize text={"Круг2. Обводка"} textAs={"Как 1"} size={sizePole[7]} number={7} setSize={setSizePole} min={0} max={30} block={blockSizePole[7]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг3. Ширина"} textAs={"Как 1"} size={sizePole[8]} number={8} setSize={setSizePole} min={0} max={99} block={blockSizePole[8]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг3. Высота"} textAs={"Как 1"} size={sizePole[9]} number={9} setSize={setSizePole} min={0} max={99} block={blockSizePole[9]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг3. Ширина"} textAs={"Как 1"} size={sizePole[8]} number={8} setSize={setSizePole} min={0} max={199} block={blockSizePole[8]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг3. Высота"} textAs={"Как 1"} size={sizePole[9]} number={9} setSize={setSizePole} min={0} max={199} block={blockSizePole[9]} setBlock={setBlocSizePole} />
                             <OptionSize text={"Круг3. Обводка"} textAs={"Как 1"} size={sizePole[10]} number={10} setSize={setSizePole} min={0} max={30} block={blockSizePole[10]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг4. Ширина"} textAs={"Как 1"} size={sizePole[11]} number={11} setSize={setSizePole} min={0} max={99} block={blockSizePole[11]} setBlock={setBlocSizePole} />
-                            <OptionSize text={"Круг4. Высота"} textAs={"Как 1"} size={sizePole[12]} number={12} setSize={setSizePole} min={0} max={99} block={blockSizePole[12]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг4. Ширина"} textAs={"Как 1"} size={sizePole[11]} number={11} setSize={setSizePole} min={0} max={199} block={blockSizePole[11]} setBlock={setBlocSizePole} />
+                            <OptionSize text={"Круг4. Высота"} textAs={"Как 1"} size={sizePole[12]} number={12} setSize={setSizePole} min={0} max={199} block={blockSizePole[12]} setBlock={setBlocSizePole} />
                             <OptionSize text={"Круг4. Обводка"} textAs={"Как 1"} size={sizePole[13]} number={13} setSize={setSizePole} min={0} max={30} block={blockSizePole[13]} setBlock={setBlocSizePole} />
                             <OptionSize text={"Рубаха. Заголовок"} textAs={"Как лицо"} size={sizePole[14]} number={14} setSize={setSizePole} min={0} max={49} block={blockSizePole[14]} setBlock={setBlocSizePole} />
                             <OptionSize text={"Рубаха. Перекладина"} size={sizePole[15]} number={15} setSize={setSizePole} min={0} max={49} block={blockSizePole[15]} setBlock={setBlocSizePole} />
@@ -1527,10 +1544,10 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
                             <OptionSize text={"Лицо. Заголовок"} size={sizeText[0]} number={0} setSize={setSizeText} min={0} max={99} block={blockSizeText[0]} setBlock={setBlocSizeText} />
                             <OptionSize text={"Лицо. Описание"} size={sizeText[1]} number={1} setSize={setSizeText} min={0} max={99} block={blockSizeText[1]} setBlock={setBlocSizeText} />
                             <OptionSize text={"Лицо. Подпись"} size={sizeText[2]} number={2} setSize={setSizeText} min={0} max={99} block={blockSizeText[2]} setBlock={setBlocSizeText} />
-                            <OptionSize text={"Круг 1"} size={sizeText[3]} number={3} setSize={setSizeText} min={0} max={99} block={blockSizeText[3]} setBlock={setBlocSizeText} />
-                            <OptionSize text={"Круг 2"} textAs={"Как 1"} size={sizeText[4]} number={4} setSize={setSizeText} min={0} max={99} block={blockSizeText[4]} setBlock={setBlocSizeText} />
-                            <OptionSize text={"Круг 3"} textAs={"Как 1"} size={sizeText[5]} number={5} setSize={setSizeText} min={0} max={99} block={blockSizeText[5]} setBlock={setBlocSizeText} />
-                            <OptionSize text={"Круг 4"} textAs={"Как 1"} size={sizeText[6]} number={6} setSize={setSizeText} min={0} max={99} block={blockSizeText[6]} setBlock={setBlocSizeText} />
+                            <OptionSize text={"Круг 1"} size={sizeText[3]} number={3} setSize={setSizeText} min={0} max={199} block={blockSizeText[3]} setBlock={setBlocSizeText} />
+                            <OptionSize text={"Круг 2"} textAs={"Как 1"} size={sizeText[4]} number={4} setSize={setSizeText} min={0} max={199} block={blockSizeText[4]} setBlock={setBlocSizeText} />
+                            <OptionSize text={"Круг 3"} textAs={"Как 1"} size={sizeText[5]} number={5} setSize={setSizeText} min={0} max={199} block={blockSizeText[5]} setBlock={setBlocSizeText} />
+                            <OptionSize text={"Круг 4"} textAs={"Как 1"} size={sizeText[6]} number={6} setSize={setSizeText} min={0} max={199} block={blockSizeText[6]} setBlock={setBlocSizeText} />
                             <OptionSize text={"Рубаха. Заголовок"} textAs={"Как лицо"} size={sizeText[7]} number={7} setSize={setSizeText} min={0} max={99} block={blockSizeText[7]} setBlock={setBlocSizeText} />
                             <OptionSize text={"Рубаха. Перекладина"}  size={sizeText[8]} number={8} setSize={setSizeText} min={0} max={99} block={blockSizeText[8]} setBlock={setBlocSizeText} />
                             <OptionSize text={"Рубаха. Подпись"} textAs={"Как лицо"} size={sizeText[9]} number={9} setSize={setSizeText} min={0} max={99} block={blockSizeText[9]} setBlock={setBlocSizeText} />
@@ -1695,6 +1712,10 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
                         <div className={style.Base}>
                             <div className={style.Title}>База</div>
                             <div className={style.BaseTips}>
+                                <BaseTip name={"Примеры"} setTargetBase={() => {
+                                    setCSV("\"Пример карточки\";\"0\";\"0\";\"Это краткое описание\";\"Это подпись\";\"1\";\"2\";\"3\";\"4\";\"Тестовая карточка\";\"Что это?\";\"Много текста. Очень много текста. Лорем. ЛОРЕМ. ААААААААА.ЏLorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi pariatur odit, obcaecati aliquid harum ipsam ea beatae deserunt dolores doloribus corrupti error praesentium nulla laudantium repudiandae quae quidem aspernatur vitae!ЏLorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem saepe architecto voluptatem totam accusamus, velit ad veritatis ullam obcaecati earum labore sapiente? Optio modi sit fugiat architecto? Ipsam, facere. Pariatur!ЏLorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis, enim. Totam a eius possimus ipsum necessitatibus, corporis autem labore velit consequatur obcaecati explicabo quo, sunt similique reprehenderit. Atque, provident animi.ЏLorem ipsum dolor sit amet consectetur adipisicing elit. Vero quidem eaque, atque quae recusandae, excepturi mollitia velit eveniet, tempora consectetur temporibus tempore sequi aperiam nostrum nulla veritatis eligendi ullam voluptates.\";\"\";\n\"Керамический кувшин\";\"1\";\"0\";\"Керамический кувшин, кажется способным вместить 1 галлон. Если его потрясти, то можно услышать звуки плескающийся жидкости.\";\"\";\"500з\";\"12ф\";\"\";\"\";\"Алхимический сосуд\";\"Чудесный предмет, необычный\";\"Этот керамический кувшин, кажется способным вместить 1 галлон жидкости и весит 12 фунтов вне зависимости от того, полный он или пустой. Если его потрясти, то можно услышать звуки плескающийся жидкости, даже если кувшин пуст.ЏВы можете действием назвать одну жидкость из приведённой ниже таблицы, отчего кувшин начнёт её производить. После этого вы можете ещё одним действием откупорить кувшин и вылить эту жидкость из сосуда со скоростью до 2 галлонов в минуту. Максимальное количество жидкости, которое может произвести кувшин, зависит от вида жидкости, названной вами.ЏПосле того, как кувшин начинает производить выбранную жидкость, он не может производить другую, или произвести названную жидкость в объёме больше её максимума, пока не наступит следующий рассвет.ЏВино	1 галлонЏВода пресная	8 галлоновЏВода солёная	12 галлоновЏКислота	8 унцийЏМайонез	2 галлонаЏМасло	1 квартаЏМёд	1 галлонЏПиво	4 галлонаЏУксус	2 галлонаЏЯд, простой	1/2 унции\";\"\";\n\"Амулет\";\"2\";\"0\";\"Амулет. От него чувствуется магия.\";\"\";\"500з\";\"\";\"\";\"\";\"Амулет защитыЏот обнаружения и поиска\";\"Чудесный предмет, необычный (требуется настройка)\";\"Пока вы носите этот амулет, вы скрыты от магии школы Прорицания. Вы не можете быть целью подобной магии, и вас не воспринимают магические сенсоры слежения.\";\"\";\n\"Амулет\";\"3\";\"0\";\"Амулет. От него чувствуется магия.\";\"\";\"5000з\";\"\";\"\";\"\";\"Амулет здоровья\";\"Чудесный предмет, редкий (требуется настройка)\";\"Пока вы носите этот амулет, ваше значение Телосложения равно 19. Если ваше Телосложение без него уже 19 или выше, то амулет не оказывает на вас никакого действия.\";\"\";\n\"Амулет\";\"4\";\"0\";\"Амулет. От него чувствуется магия.\";\"\";\"50тз\";\"\";\"\";\"\";\"Амулет планов\";\"Чудесный предмет, очень редкий (требуется настройка)\";\"Пока вы носите этот амулет, вы можете действием назвать хорошо знакомое вам место на другом плане. После этого необходимо совершить проверку Интеллекта Сл 15. При успехе вы накладываете заклинание уход в иной мир [plane shift]. При провале вы и все существа и предметы в пределах 15 футов от вас переноситесь в случайном направлении. Бросьте к100. При результате \"\"1–60\"\" вы переноситесь в случайное место на названном вами плане. При результате \"\"61–100\"\" вы переноситесь в случайное место на вашем текущем плане существования.\";\"\";\n\"Доспех\";\"6\";\"0\";\"Доспех сделанный из необычного металла.\";\"\";\"500з\";\"\";\"\";\"\";\"Адамантиновый доспех\";\"Доспех (средний или тяжелый, кроме шкурного), необычный\";\"Эти доспехи усилены адамантином, одним из самых прочных из существующих веществ. Пока вы носите эти доспехи, все критические попадания по вам считаются обычными попаданиями.\";\"\";\n\"Палочка\";\"22\";\"0\";\"Палочка. От нее веет магией.\";\"\";\"500з\";\"\";\"\";\"\";\"Волшебная палочка снарядов\";\"Волшебная палочка, необычная\";\"У этой волшебной палочки 7 зарядов. Если вы её держите, вы можете действием потратить 1 или несколько зарядов, чтобы наложить с её помощью заклинание волшебная стрела. За 1 заряд вы накладываете это заклинание 1-го уровня. Вы можете увеличить уровень заклинания на 1 за каждый дополнительный используемый заряд.ЏПалочка ежедневно восстанавливает 1к6 + 1 заряд на рассвете. Если вы истратили последний заряд в палочке, бросьте к20. Если выпадет «1», палочка рассыплется в пыль и уничтожится.\";\"\";\n\"Палочка\";\"18\";\"0\";\"Палочка. От нее веет магией.\";\"\";\"500з\";\"\";\"\";\"\";\"Волшебная палочка паутины\";\"Волшебная палочка, необычная (требуется настройка заклинателем)\";\"У этой волшебной палочки 7 зарядов. Если вы её держите, вы можете действием потратить 1 или несколько зарядов, чтобы наложить с её помощью заклинание волшебная стрелаУ этой волшебной палочки 7 зарядов. Если вы её держите, вы можете действием потратить 1 заряд, чтобы наложить ей заклинание паутина (Сл спасброска 15).ЏПалочка ежедневно восстанавливает 1к6 + 1 заряд на рассвете. Если вы истратили последний заряд в палочке, бросьте к20. Если выпадет «1», палочка рассыплется в пыль и уничтожится.. За 1 заряд вы накладываете это заклинание 1-го уровня. Вы можете увеличить уровень заклинания на 1 за каждый дополнительный используемый заряд.ЏПалочка ежедневно восстанавливает 1к6 + 1 заряд на рассвете. Если вы истратили последний заряд в палочке, бросьте к20. Если выпадет «1», палочка рассыплется в пыль и уничтожится.\";\"\";\n\"Меч\";\"31\";\"0\";\"Меч. Держа его в руке, Вы ощущаете страх.\";\"\";\"5000з\";\"\";\"\";\"\";\"Вор девяти жизней\";\"Оружие (любой меч), очень редкое (требуется настройка)\";\"Вы получаете бонус +2 к броскам атаки и урона этим магическим оружием.ЏУ меча есть 1к8 + 1 заряд. Если вы совершаете критическое попадание по существу, у которого меньше 100 хитов, оно должно преуспеть в спасброске Телосложения Сл 15, иначе мгновенно умрёт, когда меч вырвет его жизненную силу из тела (конструкты и нежить обладают иммунитетом). Меч теряет 1 заряд, если существо умирает. Когда у меча не останется зарядов, он теряет это свойство.\";\"\";\n\"Жаровня\";\"40\";\"0\";\"Выглядит как обычная жаровня.\";\"\";\"500з\";\"5ф\";\"\";\"\";\"Жаровня командованияЏогненными элементалями\";\"Чудесный предмет, редкий\";\"Если в этой латунной жаровне горит огонь, вы можете действием произнести командное слово и призвать огненного элементаля, как если бы наложили заклинание призыв элементаля. Жаровню нельзя использовать повторно, пока не наступит следующий рассвет.\";\"\";\n\"Кольцо\";\"91\";\"0\";\"Кольцо с кальмаром. Выглядит удивленно.\";\"\";\"100з\";\"\";\"\";\"\";\"Кольцо плавания\";\"Кольцо, необычное\";\"Вы получаете скорость плавания 40 футов, пока носите это кольцо.\";\"\";\n\"Баночка с мазью\";\"116\";\"0\";\"Запечатанная баночка с мазью. Немного пахнет алоэ.\";\"\";\"100з\";\"0,5ф\";\"\";\"\";\"Мазь Кеогтома\";\"Чудесный предмет, необычный\";\"Это стеклянная банка, три дюйма в диаметре, содержит 1к4 + 1 доз густой мази, которая слабо пахнет алоэ. Банка и её содержимое весят 0,5 фунта.ЏДействием можно проглотить или нанести на кожу одну дозу мази. Существо, которое делает так, восстанавливает 2к8 + 2 хита, перестаёт быть отравленным и излечивается от всех болезней.\";\"\";\n\"Свирель\";\"186\";\"0\";\"Музыкальный инструмент, сделан из костей.\";\"\";\"100з\";\"\";\"\";\"\";\"Свирель ужаса\";\"Чудесный предмет, необычный\";\"Вы должны владеть духовыми музыкальными инструментами, чтобы использовать эту свирель. У неё есть 3 заряда. Вы можете действием поиграть на ней и потратить 1 заряд, чтобы издать жуткую мелодию. Все существа в пределах 30 футов от вас, слышащие вашу мелодию, должны преуспеть в спасброске Мудрости Сл 15, иначе они станут испуганными вами на 1 минуту. Если хотите, все существа в этой области, не враждебные по отношению к вам, автоматически преуспеют в этом спасброске. Существа, провалившие спасбросок, могут повторять его в конце каждого своего хода, оканчивая эффект на себе при успехе. Существо, преуспевшее в спасброске, получает иммунитет к этой свирели на 24 часа. Свирель ежедневно восстанавливает 1к3 заряда на рассвете.\";\"\";\n\"Сапоги\";\"228\";\"0\";\"Элегантные мягкие сапоги с приятными лесными орнаментами.\";\"\";\"100з\";\"\";\"\";\"\";\"Эльфийские сапоги\";\"Чудесный предмет, необычный\";\"Пока вы носите эти сапоги, ваши шаги не издают звука, вне зависимости от поверхности, по которой вы идёте. Вы также совершаете с преимуществом проверки Ловкости (Скрытность), которые полагаются на бесшумное передвижение.\";\"\";");
+                                    setMakeCSV(makeCSV + 1);
+                                }} />
                             </div>
                         </div>
                         <div className={style.InputPlace}>
@@ -1736,7 +1757,7 @@ const SpellMain = ({ }: AlertProps): JSX.Element => {
                                     <input placeholder='Заголовок2' type="text" value={newCard[9]} onChange={(e) => { const A = newCard; A[9] = e.target.value;  setPoles(A)}} />
                                     <input placeholder='Подзаголовок' type="text" value={newCard[10]} onChange={(e) => { const A = newCard; A[10] = e.target.value;  setPoles(A)}} />
                                     <textarea placeholder='Описание' rows={6} value={newCard[11]} onChange={(e) => { const A = newCard; A[11] = e.target.value;  setPoles(A)}} />
-                                    <input placeholder='Подзаголовок' type="text" value={newCard[12]} onChange={(e) => { const A = newCard; A[12] = e.target.value;  setPoles(A)}} />
+                                    <input placeholder='Подпись' type="text" value={newCard[12]} onChange={(e) => { const A = newCard; A[12] = e.target.value;  setPoles(A)}} />
                                 </div>
                             </div>
                         </div>
