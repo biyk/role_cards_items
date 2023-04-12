@@ -13,6 +13,20 @@ type AlertProps = {
 };
 const Card = ({svitok,cardImg, targetFont, isBack, keyt, Pole, minMax, plusPerepolnen, startPerepolnen}: AlertProps): JSX.Element => {
     let descriptionMain, descriptionText;
+    const inputRef = React.useRef<HTMLImageElement>(null)
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { files } = event.target;
+        const selectedFiles = files as FileList;
+        let to_file = selectedFiles?.[0]
+        let reader_obj = new FileReader();
+        reader_obj.readAsDataURL(to_file);
+        reader_obj.onload = () => {
+            // @ts-ignore
+            inputRef.current.src = reader_obj.result
+            console.log(inputRef);
+        }
+
+    }
     useEffect(() => {
         descriptionMain = document.getElementById("Card " + keyt);
         descriptionText = document.getElementById("CardControl " + keyt);;
@@ -46,7 +60,11 @@ const Card = ({svitok,cardImg, targetFont, isBack, keyt, Pole, minMax, plusPerep
             <div className={style.Main + ' ' + style[targetFont]}>
                 <div className={style.Zagolovok}><div>{Pole[0]}</div></div>
                 <div className={style.Inside}>
-                    <img src={cardImg} alt="" />
+                    <label>
+                    <img src={cardImg} alt="" ref={inputRef} />
+                        <input type="file" onChange={onChange}  className={style.hidden} />
+                    </label>
+
                     {Pole[3]!="" ? <div className={style.Description}>
                         <img src={svitok} alt="" />
                         <div>{Pole[3]}</div>

@@ -170,6 +170,10 @@
         justify-content: var(--CardZagolovokTextAlign);
         align-items: center;
     }
+
+    .hidden{
+        display: none;
+    }
     .Inside {
         overflow: hidden;
         height: calc(100% - var(--CardZagolovokTextSize) - var(--CardDownTextSize));
